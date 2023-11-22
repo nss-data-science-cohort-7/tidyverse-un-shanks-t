@@ -1,0 +1,46 @@
+```{r}
+library(tidyverse)
+```
+
+```{r}
+gdp <- read_csv("./data/gdp_per_capita.csv")
+```
+```{r}
+colnames(gdp)
+```
+```{r}
+gdp <- select(gdp, -"Value Footnotes")
+```
+
+```{r}
+gdp |>
+  head(10)
+```
+
+```{r}
+colnames(gdp)
+```
+
+```{r}
+gdp <- gdp |> rename("Country" = "Country or Area", "GDP_Per_Capita" = "Value")
+```
+
+```{r}
+gdp |> colnames()
+```
+
+```{r}
+obs_per_year <- gdp |>
+group_by(Year) |>
+summarise(count = n()) |>
+arrange(desc(count))
+```
+
+```{r}
+ggplot(obs_per_year, aes(x=Year)) + geom_histogram(color="black", fill="white")
+```
+
+```{r}
+gdp |> group_by(Country) |> summarise(count = n())
+```
+
