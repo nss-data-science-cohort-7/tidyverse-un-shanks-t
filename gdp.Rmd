@@ -30,17 +30,40 @@ gdp |> colnames()
 ```
 
 ```{r}
-obs_per_year <- gdp |>
+gdp |>
 group_by(Year) |>
 summarise(count = n()) |>
 arrange(desc(count))
 ```
 
 ```{r}
-ggplot(obs_per_year, aes(x=Year)) + geom_histogram(color="black", fill="white")
+gdp |>
+ggplot(aes(x=Year)) + geom_histogram(stat = "count", color="black", fill="white")
+
+```
+```{r}
+gdp |>
+group_by(Country) |>
+summarise(count = n()) |>
+arrange(count)
 ```
 
 ```{r}
-gdp |> group_by(Country) |> summarise(count = n())
-```
+gpd_2014 <- gdp |>
+  filter(Year == 2014)
 
+summary(gpd_2014)
+
+```
+```{r}
+gdp |>
+ggplot(aes(x=Country)) + geom_histogram(stat = "count", color="black", fill="white")
+```
+```{r}
+gpd_2014 |>
+  ggplot(aes(x = GDP_Per_Capita)) +
+  geom_histogram( bins = 50, color="black", fill="white")
+```
+```{r}
+
+```
